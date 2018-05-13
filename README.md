@@ -1,7 +1,13 @@
 # CTPNモジュールとは
 CTPT(Connectionist Text Proposal Network)とは、画像内から文字列を検出するニューラルネットワークのモデル名である。  
-参考: https://arxiv.org/abs/1609.03605  
-参考: https://github.com/tianzhi0549/CTPN
+
+## Reference
+* Zhi Tian: Detecting Text in Natural Image with Connectionist Text Proposal Network  
+https://arxiv.org/abs/1609.03605  
+
+* tianzhi0549/CTPN  
+https://github.com/tianzhi0549/CTPN
+
 
 # セットアップ
 ## GPUを使う場合
