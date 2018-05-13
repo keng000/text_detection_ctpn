@@ -1,6 +1,6 @@
 # CTPNモジュールとは
 CTPT(Connectionist Text Proposal Network)とは、画像内から文字列を検出するニューラルネットワークのモデル名である。  
-参考: https://arxiv.org/abs/1609.03605
+参考: https://arxiv.org/abs/1609.03605  
 参考: https://github.com/tianzhi0549/CTPN
 
 # セットアップ
@@ -12,8 +12,13 @@ CTPT(Connectionist Text Proposal Network)とは、画像内から文字列を検
     git clone https://github.com/keng000/text-detection-ctpn.git text_detection_ctpn
     ```
 
-1. 学習済みモデルのパスをconfigに記載
-    checkpoints/ へのパスを記す。
+1. 学習済みモデルを取得。パスをconfigに記載する。
+
+	学習済みモデルのダウンロードリンクは下記。  
+	https://drive.google.com/open?id=18EMw2lyXekqbDYxhf-ewrUsShAqxls_4
+    
+	checkpoints/ へのパスを記す。
+
     ```
     vim text_detection_ctpn/ctpn/text.yml
     TEST:
@@ -22,8 +27,7 @@ CTPT(Connectionist Text Proposal Network)とは、画像内から文字列を検
     ```
 
 1. requirements.txtインストール
-ただし、kenichiにはopencvが既にインストールされているため、 opencv-pythonは消す。
- 
+
     ```
     pip install -r text_detection_ctpn/requirements.txt
     ```
@@ -35,6 +39,13 @@ CTPT(Connectionist Text Proposal Network)とは、画像内から文字列を検
     sh make.sh gpu
     ```
 
+1. site-packages/ から text_detection_ctpn/へシムリンクを貼る
+	
+	```
+	cd text_detection_ctpn
+	ln -si `pwd` `python -c 'import os.path as d; import pip; print(d.dirname(d.dirname(pip.__file__)))'`/$(basename `pwd`)
+	```
+
 ## GPUを使わない場合
 
 
@@ -42,6 +53,20 @@ CTPT(Connectionist Text Proposal Network)とは、画像内から文字列を検
 
     ```
     git clone https://github.com/keng000/text-detection-ctpn.git text_detection_ctpn
+    ```
+
+1. 学習済みモデルを取得。パスをconfigに記載する。
+
+	学習済みモデルのダウンロードリンクは下記。  
+	https://drive.google.com/open?id=18EMw2lyXekqbDYxhf-ewrUsShAqxls_4
+    
+	checkpoints/ へのパスを記す。
+
+    ```
+    vim text_detection_ctpn/ctpn/text.yml
+    TEST:
+      checkpoints_path: checkpoints/ # -> 更新
+     
     ```
 
 1. GPUフラグをFalseにする。
@@ -56,20 +81,16 @@ CTPT(Connectionist Text Proposal Network)とは、画像内から文字列を検
     __C.USE_GPU_NMS = True # -> False
     ```
 
-1. 学習済みモデルのパスをconfigに記載
-    checkpoints/ へのパスを記す。
-    ```
-    vim text_detection_ctpn/ctpn/text.yml
-    TEST:
-      checkpoints_path: checkpoints/ # -> 更新
-     
-    ```
-
 1. requirements.txtインストール
-ただし、kenichiにはopencvが既にインストールされているため、 opencv-pythonは消す。
-またtensorflow-gpu を tensorflowに変える。
+	
+	tensorflow-gpu を tensorflowに変える。
 
     ```
+	vim requirements.txt
+	tensorflow-gpu==1.3.0 -> tensorflow==1.3.0
+	```
+
+	```
     pip install -r text_detection_ctpn/requirements.txt
     ```
 
@@ -80,7 +101,14 @@ CTPT(Connectionist Text Proposal Network)とは、画像内から文字列を検
     sh make.sh cpu
     ```
 
-## 動作検証
+1. site-packages/ から text_detection_ctpn/へシムリンクを貼る
+	
+	```
+	cd text_detection_ctpn
+	ln -si `pwd` `python -c 'import os.path as d; import pip; print(d.dirname(d.dirname(pip.__file__)))'`/$(basename `pwd`)
+	```
+
+# 動作検証
 
 サンプルプログラムによる動作検証
 ```
@@ -99,9 +127,13 @@ Tensor("rpn_cls_prob:0", shape=(?, ?, ?, ?), dtype=float32)
 Tensor("Reshape_2:0", shape=(?, ?, ?, 20), dtype=float32)
 Tensor("rpn_bbox_pred/Reshape_1:0", shape=(?, ?, ?, 40), dtype=float32)
 Tensor("Placeholder_1:0", shape=(?, 3), dtype=float32)
-Loading network VGGnet_test...  Restoring from /home/kengo/workspace/python3X/github_library/text_detection_ctpn/checkpoints... done
+Loading network VGGnet_test...  Restoring from /path/to/text_detection_ctpn/checkpoints... done
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Demo for /home/kengo/anaconda3/envs/klavpy3Env/lib/python3.6/site-packages/text_detection_ctpn/data/demo/010.png
+Demo for /path/to/lib/python3.6/site-packages/text_detection_ctpn/data/demo/010.png
 Detection took 4.965s for 8 object proposals       
 ```
+
+# TODO
+- [ ] setpy.pyによるモジュールのセットアップ化
+
 
