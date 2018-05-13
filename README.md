@@ -1,5 +1,5 @@
-# CTPNモジュールとは
-CTPT(Connectionist Text Proposal Network)とは、画像内から文字列を検出するニューラルネットワークのモデル名である。  
+# Description
+CTPN(Connectionist Text Proposal Network)とは、画像内から文字列を検出するニューラルネットワークのモデル名である．  
 
 ## Reference
 * Zhi Tian: Detecting Text in Natural Image with Connectionist Text Proposal Network  
@@ -9,7 +9,56 @@ https://arxiv.org/abs/1609.03605
 https://github.com/tianzhi0549/CTPN
 
 
-# セットアップ
+# Usage 
+## Functions
+
+### ctpn_interface.ctpn(sess, net, in_img)
+
+このモジュールのメインとなる関数．  
+入力した画像を元に、その画像上の文字列と思しき領域の座標をリストで返す．
+
+入力 
+
+| Args | Type | Remarks |
+| :---: | :---: | :--- |
+| sess | tensorflow.Session | Tensorflowセッション. 下記tf_utils.create_tf_session()により生成． |
+| net | network.Network | Tensorflow計算グラフ. 下記tf_utils.load_trained_model(sess)により生成． |
+| in_img | numpy.ndarray | ３チャンネル入力画像． |
+
+出力
+
+| Type | Remarks |
+| :---: | :--- |
+| list of tuple | 1つの要素が座標を表すタプル (左上x, 左上y, 右下x, 右下y) であるリスト |
+
+
+### tf_utils.create_tf_session()
+
+Tensorflowのセッションを生成する関数．
+
+ 出力
+
+| Type | Remarks |
+| :---: | :--- |
+| sess | tensorflow.Session | Tensorflowセッション. |
+
+### tf_utils.load_trained_model(sess)
+
+Tensorflowのセッション上に学習済み計算グラフを展開し、計算グラフを返す関数．
+
+入力 
+
+| Args | Type | Remarks |
+| :---: | :---: | :--- |
+| sess | tensorflow.Session | Tensorflowセッション. 下記tf_utils.create_tf_session()により生成． |
+
+出力
+
+| Type | Remarks |
+| :---: | :--- |
+| network.Network | Tensorflow計算グラフ. |
+
+# Setup
 ## GPUを使う場合
 
 1. プロジェクトクローン
@@ -18,12 +67,12 @@ https://github.com/tianzhi0549/CTPN
     git clone https://github.com/keng000/text-detection-ctpn.git text_detection_ctpn
     ```
 
-1. 学習済みモデルを取得。パスをconfigに記載する。
+1. 学習済みモデルを取得．パスをconfigに記載する．
 
-	学習済みモデルのダウンロードリンクは下記。  
+	学習済みモデルのダウンロードリンクは下記．  
 	https://drive.google.com/open?id=18EMw2lyXekqbDYxhf-ewrUsShAqxls_4
     
-	checkpoints/ へのパスを記す。
+	checkpoints/ へのパスを記す．
 
     ```
     vim text_detection_ctpn/ctpn/text.yml
@@ -61,12 +110,12 @@ https://github.com/tianzhi0549/CTPN
     git clone https://github.com/keng000/text-detection-ctpn.git text_detection_ctpn
     ```
 
-1. 学習済みモデルを取得。パスをconfigに記載する。
+1. 学習済みモデルを取得．パスをconfigに記載する．
 
-	学習済みモデルのダウンロードリンクは下記。  
+	学習済みモデルのダウンロードリンクは下記．  
 	https://drive.google.com/open?id=18EMw2lyXekqbDYxhf-ewrUsShAqxls_4
     
-	checkpoints/ へのパスを記す。
+	checkpoints/ へのパスを記す．
 
     ```
     vim text_detection_ctpn/ctpn/text.yml
@@ -75,7 +124,7 @@ https://github.com/tianzhi0549/CTPN
      
     ```
 
-1. GPUフラグをFalseにする。
+1. GPUフラグをFalseにする．
 
     ```
     vim text_detection_ctpn/ctpn/text.yml
@@ -89,7 +138,7 @@ https://github.com/tianzhi0549/CTPN
 
 1. requirements.txtインストール
 	
-	tensorflow-gpu を tensorflowに変える。
+	tensorflow-gpu を tensorflowに変える．
 
     ```
 	vim requirements.txt
@@ -114,7 +163,7 @@ https://github.com/tianzhi0549/CTPN
 	ln -si `pwd` `python -c 'import os.path as d; import pip; print(d.dirname(d.dirname(pip.__file__)))'`/$(basename `pwd`)
 	```
 
-# 動作検証
+## 動作検証
 
 サンプルプログラムによる動作検証
 ```
