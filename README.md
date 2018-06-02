@@ -61,8 +61,8 @@ Tensorflowのセッション上に学習済み計算グラフを展開し、計�
 # Setup
 ## Requirements
 * python >= 3.5  
-* CUDA 8.0  
-* cuDNN 6.x 
+* CUDA == 8.0  
+* cuDNN == 6.x 
 
 ## GPUを使う場合
 
