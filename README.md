@@ -83,7 +83,6 @@ Tensorflowのセッション上に学習済み計算グラフを展開し、計�
     vim text_detection_ctpn/ctpn/text.yml
     TEST:
       checkpoints_path: checkpoints/ # -> 更新
-     
     ```
 
 1. requirements.txtインストール
@@ -126,7 +125,6 @@ Tensorflowのセッション上に学習済み計算グラフを展開し、計�
     vim text_detection_ctpn/ctpn/text.yml
     TEST:
       checkpoints_path: checkpoints/ # -> 更新
-     
     ```
 
 1. GPUフラグをFalseにする．
