@@ -59,6 +59,11 @@ Tensorflowのセッション上に学習済み計算グラフを展開し、計�
 | network.Network | Tensorflow計算グラフ. |
 
 # Setup
+## Requirements
+* python >= 3.5  
+* CUDA 8.0  
+* cuDNN 6.x 
+
 ## GPUを使う場合
 
 1. プロジェクトクローン
